@@ -35,30 +35,34 @@ public class CentralController {
     @RequestMapping("/login")
     public LoginResult login(@RequestParam(value="netuser", defaultValue="netuser") String name) {
         int response = 99;
-		try {
-			//Establish Connection
-			Class.forName("com.ibm.as400.access.AS400JDBCDriver");
-			Properties prop = new Properties();
-			prop.put("user", "PSTELLER");
-			prop.put("password", "TELLER");
-			prop.put("prompt", "false");
-			prop.put("errors", "full");
-			Connection as400 = DriverManager.getConnection("jdbc:as400://S657274B", prop);
-			as400.setAutoCommit(true);
+        
+		System.out.println("logon to AS400");
+		AS400 system = new AS400(SYSNAME, USERNAME , PASSWORD);
+		ProgramCall program=new ProgramCall(system);
+		String programName = "/QSYS.LIB/YMYLES.LIB/JAVACALL.PGM";
+		ProgramParameter[] parameterList = new ProgramParameter[0];
+		AS400Text textData = new AS400Text(100, system);
+		//parameterList[0] = new ProgramParameter(textData.toBytes("ABC"));
+
+		try{
+			System.out.println("Run Program");
+			program.setProgram(programName);	
+			program.setParameterList(parameterList);
+			program.run();
 			
-			//Call the Stored Procedure
-			CallableStatement cstmt = as400.prepareCall("CALL YMYLES1.VERIFYUSR(?)");
-			cstmt.registerOutParameter(1, Types.CHAR);
-			cstmt.execute();
-            
-            //Get result
-			response = Integer.parseInt(cstmt.getString(1));
+			System.out.println("Present the changed variable");	
+			AS400Message[] outputMessageList = program.getMessageList();
+			for (int i = 0; i < outputMessageList.length; ++i){
+					// Show each message.
+					System.out.println(outputMessageList[i].getText());
+					// Load additional message information.
+					outputMessageList[i].load();
+					//Show help text.
+					System.out.println(outputMessageList[i].getHelp());
+			}
+            system.disconnectAllServices();
 			
-			//clean up
-			cstmt.close();
-			as400.close();
-		} 
-		catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 
