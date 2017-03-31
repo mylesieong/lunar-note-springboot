@@ -23,51 +23,21 @@ import java.util.StringTokenizer;
 @RestController
 public class CentralController {
 
-    private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    // @RequestMapping("/greeting")
-    // public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        // return new Greeting(counter.incrementAndGet(),
-                            // String.format(template, name));
-    // }
-    
     @RequestMapping("/login")
     public LoginResult login(@RequestParam(value="netuser", defaultValue="netuser") String name) {
         int response = 99;
-        
-		// System.out.println("logon to AS400");
-		// AS400 system = new AS400(SYSNAME, USERNAME , PASSWORD);
-		// ProgramCall program=new ProgramCall(system);
-		// String programName = "/QSYS.LIB/YMYLES.LIB/JAVACALL.PGM";
-		// ProgramParameter[] parameterList = new ProgramParameter[0];
-		// AS400Text textData = new AS400Text(100, system);
-		// // parameterList[0] = new ProgramParameter(textData.toBytes("ABC"));
-
-		// try{
-			// System.out.println("Run Program");
-			// program.setProgram(programName);	
-			// program.setParameterList(parameterList);
-			// program.run();
-			
-			// System.out.println("Present the changed variable");	
-			// AS400Message[] outputMessageList = program.getMessageList();
-			// for (int i = 0; i < outputMessageList.length; ++i){
-					// // Show each message.
-					// System.out.println(outputMessageList[i].getText());
-					// // Load additional message information.
-					// outputMessageList[i].load();
-					// // Show help text.
-					// System.out.println(outputMessageList[i].getHelp());
-			// }
-            // system.disconnectAllServices();
-			
-		// }catch(Exception e){
-			// e.printStackTrace();
-		// }
-
-        // return new LoginResult(counter.incrementAndGet(), response);
         return new LoginResult(counter.incrementAndGet(), 99);
+    }
+
+    @RequestMapping("/inquiry")
+    public InquiryResult inquiry(@RequestParam(value="netuser", defaultValue="netuser") String name) {
+	String sysId = "100123";
+	String sysName = "CHAN DA MAN";
+	String sysStatus = "PENDING";
+	String sysReturnCode = "0";
+        return new InquiryResult(counter.incrementAndGet(), sysId, sysName, sysStatus, sysReturnCode);
     }
     
 }
