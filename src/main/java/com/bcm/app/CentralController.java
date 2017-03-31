@@ -36,37 +36,38 @@ public class CentralController {
     public LoginResult login(@RequestParam(value="netuser", defaultValue="netuser") String name) {
         int response = 99;
         
-		System.out.println("logon to AS400");
-		AS400 system = new AS400(SYSNAME, USERNAME , PASSWORD);
-		ProgramCall program=new ProgramCall(system);
-		String programName = "/QSYS.LIB/YMYLES.LIB/JAVACALL.PGM";
-		ProgramParameter[] parameterList = new ProgramParameter[0];
-		AS400Text textData = new AS400Text(100, system);
-		//parameterList[0] = new ProgramParameter(textData.toBytes("ABC"));
+		// System.out.println("logon to AS400");
+		// AS400 system = new AS400(SYSNAME, USERNAME , PASSWORD);
+		// ProgramCall program=new ProgramCall(system);
+		// String programName = "/QSYS.LIB/YMYLES.LIB/JAVACALL.PGM";
+		// ProgramParameter[] parameterList = new ProgramParameter[0];
+		// AS400Text textData = new AS400Text(100, system);
+		// // parameterList[0] = new ProgramParameter(textData.toBytes("ABC"));
 
-		try{
-			System.out.println("Run Program");
-			program.setProgram(programName);	
-			program.setParameterList(parameterList);
-			program.run();
+		// try{
+			// System.out.println("Run Program");
+			// program.setProgram(programName);	
+			// program.setParameterList(parameterList);
+			// program.run();
 			
-			System.out.println("Present the changed variable");	
-			AS400Message[] outputMessageList = program.getMessageList();
-			for (int i = 0; i < outputMessageList.length; ++i){
-					// Show each message.
-					System.out.println(outputMessageList[i].getText());
-					// Load additional message information.
-					outputMessageList[i].load();
-					//Show help text.
-					System.out.println(outputMessageList[i].getHelp());
-			}
-            system.disconnectAllServices();
+			// System.out.println("Present the changed variable");	
+			// AS400Message[] outputMessageList = program.getMessageList();
+			// for (int i = 0; i < outputMessageList.length; ++i){
+					// // Show each message.
+					// System.out.println(outputMessageList[i].getText());
+					// // Load additional message information.
+					// outputMessageList[i].load();
+					// // Show help text.
+					// System.out.println(outputMessageList[i].getHelp());
+			// }
+            // system.disconnectAllServices();
 			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		// }catch(Exception e){
+			// e.printStackTrace();
+		// }
 
-        return new LoginResult(counter.incrementAndGet(), response);
+        // return new LoginResult(counter.incrementAndGet(), response);
+        return new LoginResult(counter.incrementAndGet(), 99);
     }
     
 }
