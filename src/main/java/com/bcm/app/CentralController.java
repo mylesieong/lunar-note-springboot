@@ -37,11 +37,55 @@ public class CentralController {
 
     @RequestMapping("/inquiry")
     public InquiryResult inquiry(@RequestParam(value="netuser", defaultValue="netuser") String name) {
-        String sysId = "100123";
-        String sysName = "CHAN DA MAN";
-        String sysStatus = "PENDING";
-        String sysReturnCode = "0";
+       
+        //String sysId = "100123";
+        //String sysName = "CHAN DA MAN";
+        //String sysStatus = "PENDING";
+        //String sysReturnCode = "0";
+        String sysId = "12153524";
+        String sysName = "";
+        String sysStatus = "";
+        String sysReturnCode = "";
+        
+        try{  
+          String systemName="S657274B"; 
+          String userName="ZCSERVICE";
+          String password="ECIVRESCZ";
+          String programName="/QSYS.LIB/YMYLES1.LIB/DSNTEINQCL.PGM"; 
+          AS400 system = new AS400(systemName, userName , password);
+
+          /* Prepare parameter list */
+          ProgramParameter[] parmList= new ProgramParameter[4];
+	  AS400Text idText = new AS400Text(8);
+          parmList[0] = new ProgramParameter(idText.toBytes(sysId));
+          parmList[1] = new ProgramParameter(80);
+          parmList[2] = new ProgramParameter(10);
+          parmList[3] = new ProgramParameter(1);
+
+          ProgramCall program = new ProgramCall(system);
+          program.setProgram(programName, parmList);
+
+          if (program.run()!= true){
+              AS400Message[] messagelist = program.getMessageList();
+              for (int i = 0; i < messagelist.length; ++i){
+                  System.out.println(messagelist[i]);
+              }
+          }else{
+            /* Get the result set */
+	    AS400Text nameText = new AS400Text(80);
+	    AS400Text statusText = new AS400Text(10);
+	    AS400Text returnCodeText = new AS400Text(1);
+	    sysName = (String)nameText.toObject(parmList[1].getOutputData());
+	    sysStatus = (String)statusText.toObject(parmList[2].getOutputData());
+	    sysReturnCode = (String)returnCodeText.toObject(parmList[3].getOutputData());
+          }
+
+        }catch(Exception e){
+          e.printStackTrace();
+        }
+        
         return new InquiryResult(counter.incrementAndGet(), sysId, sysName, sysStatus, sysReturnCode);
+
     }
     
     @RequestMapping("/date")
