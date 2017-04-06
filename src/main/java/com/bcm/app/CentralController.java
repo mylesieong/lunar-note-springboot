@@ -36,13 +36,9 @@ public class CentralController {
     }
 
     @RequestMapping("/inquiry")
-    public InquiryResult inquiry(@RequestParam(value="netuser", defaultValue="netuser") String name) {
+    public InquiryResult inquiry(@RequestParam(value="key", defaultValue="") String key) {
        
-        //String sysId = "100123";
-        //String sysName = "CHAN DA MAN";
-        //String sysStatus = "PENDING";
-        //String sysReturnCode = "0";
-        String sysId = "12153524";
+        String sysId = key;
         String sysName = "";
         String sysStatus = "";
         String sysReturnCode = "";

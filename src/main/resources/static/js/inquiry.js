@@ -3,8 +3,8 @@ $(document).ready(function() {
     $("#invoke").click(function() {
         
         $.ajax({
-            // url: "http://rest-service.guides.spring.io/greeting"
-            url: "inquiry"
+            // url: "inquiry"
+            url: "inquiry?key=" + $('#keyin').val()
         }).then(function(data) {
             $('.out-id').append(data.id);
             $('.out-sysId').append(data.sysId);
