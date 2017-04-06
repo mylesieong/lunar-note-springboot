@@ -1,0 +1,329 @@
+/**
+ * Padding-top is required if using .navbar-fixed-top.
+ * This can be removed Remove if using .navbar-static-top.
+ * The height may need to be changed if the height of you
+ * navigation changes.
+*/
+body { padding-top: 70px; }
+
+/**
+ * Bootstrap requires a containing element to wrap site contents 
+ * and house the grid system. You may choose one of two containers.
+ * Use .container for a responsive fixed width container.
+ * Use .container-fluid for a full width container.
+
+ * If using container-fluid, you may need to set a maximum width, 
+ * so that the container will not spread to the entire viewport.
+*/
+.container-fluid { max-width: 1200px; }
+
+/**
+ * We can add some "helper classes" to add or remove margins to
+ * help aspects of the layout. These helper classes should only
+ * be used sparingly.
+*/
+
+.margin-birdie-up-1 { margin-top: -1.1em; }
+.margin-birdie-up-2 { margin-top: -1.65em; }
+.margin-birdie-up-3 { margin-top: -2.2em; }
+.margin-birdie-down-1 { margin-bottom: -1.1em; }
+.margin-birdie-down-2 { margin-bottom: -1.65em; }
+.margin-birdie-down-3 { margin-bottom: -2.2em; }
+
+.margin-t-h { margin-top: -0.5em; }
+.margin-t-1i { margin-top: -1em; }
+.margin-t-2i { margin-top: -2em; }
+.margin-t-3i { margin-top: -3em; }
+.margin-t-4i { margin-top: -4em; }
+.margin-t-5i { margin-top: -5em; }
+
+.margin-t-0 { margin-top: 0; }
+.margin-t-h { margin-top: .5em; }
+.margin-t-1 { margin-top: 1em; }
+.margin-t-2 { margin-top: 2em; }
+.margin-t-3 { margin-top: 3em; }
+.margin-t-4 { margin-top: 4em; }
+.margin-t-5 { margin-top: 5em; }
+
+.margin-b-hi { margin-bottom: -0.5em; }
+.margin-b-1i { margin-bottom: -1em; }
+.margin-b-2i { margin-bottom: -2em; }
+.margin-b-3i { margin-bottom: -3em; }
+.margin-b-4i { margin-bottom: -4em; }
+.margin-b-5i { margin-bottom: -5em; }
+
+.margin-b-0 { margin-bottom: 0; }
+.margin-b-h { margin-bottom: .5em; }
+.margin-b-1 { margin-bottom: 1em; }
+.margin-b-2 { margin-bottom: 2em; }
+.margin-b-3 { margin-bottom: 3em; }
+.margin-b-4 { margin-bottom: 4em; }
+.margin-b-5 { margin-bottom: 5em; }
+
+.margin-l-hi { margin-left: -0.5em; }
+.margin-l-1i { margin-left: -1em; }
+.margin-l-2i { margin-left: -2em; }
+.margin-l-3i { margin-left: -3em; }
+.margin-l-4i { margin-left: -4em; }
+.margin-l-5i { margin-left: -5em; } 
+
+.margin-l-0 { margin-left: 0; }
+.margin-l-h { margin-left: .5em; }
+.margin-l-1 { margin-left: 1em; }
+.margin-l-2 { margin-left: 2em; }
+.margin-l-3 { margin-left: 3em; }
+.margin-l-4 { margin-left: 4em; }
+.margin-l-5 { margin-left: 5em; } 
+
+.margin-r-hi { margin-right: -0.5em; }
+.margin-r-1i { margin-right: -1em; }
+.margin-r-2i { margin-right: -2em; }
+.margin-r-3i { margin-right: -3em; }
+.margin-r-4i { margin-right: -4em; }
+.margin-r-5i { margin-right: -5em; }
+
+.margin-r-0 { margin-right: 0; }
+.margin-r-h { margin-right: .5em; }
+.margin-r-1 { margin-right: 1em; }
+.margin-r-2 { margin-right: 2em; }
+.margin-r-3 { margin-right: 3em; }
+.margin-r-4 { margin-right: 4em; }
+.margin-r-5 { margin-right: 5em; }
+
+.margin-tb-0 {	margin-top: 0;	margin-bottom: 0;}
+.margin-tb-h {	margin-top: .5em;	margin-bottom: .5em;}
+.margin-tb-1 {	margin-top: 1em;	margin-bottom: 1em;}
+.margin-tb-2 {	margin-top: 2em;	margin-bottom: 2em;}
+.margin-tb-3 {	margin-top: 3em;	margin-bottom: 3em;}
+.margin-tb-4 {	margin-top: 4em;	margin-bottom: 4em;}
+.margin-tb-5 {	margin-top: 5em;	margin-bottom: 5em;}
+
+.margin-lr-0 {	margin-left: 0;	margin-right: 0;}
+.margin-lr-h {	margin-left: .5em;	margin-right: .5em;}
+.margin-lr-1 {	margin-left: 1em;	margin-right: 1em;}
+.margin-lr-2 {	margin-left: 2em;	margin-right: 2em;}
+.margin-lr-3 {	margin-left: 3em;	margin-right: 3em;}
+.margin-lr-4 {	margin-left: 4em;	margin-right: 4em;}
+.margin-lr-5 {	margin-left: 5em;	margin-right: 5em;}
+
+.icon-char {    font-size: 5px;}
+.icon-tiny {    font-size: 20px;}
+.icon-small {    font-size: 50px;}
+.icon-medium {    font-size: 100px;}
+.icon-grande {    font-size: 200px;}
+
+.color-bg-3-1 {	/*GREEN:light-green*/	background-color: #AFEAAA;}
+.color-bg-3-2 {	/*GREEN:medium-green*/	background-color: #87E293;}
+.color-bg-3-3 {	/*GREEN:deep-green*/	background-color: #41924B;}
+.color-bg-2-1 {	/*BLUE:light-blue*/	background-color: #6BCAE2;}
+.color-bg-2-2 {	/*BLUE:deep-blue*/	background-color: #51A5BA;}
+.color-bg-1-1 {	/*ORANGE:light-orange*/	background-color: #FE8402;}
+.color-bg-white {	background-color: white;}
+.color-bg-grey {	background-color: grey;}
+.color-bg-lightgrey {	background-color: #EEEEEE;}
+
+/* the 3 para of line-gradient means: turn x degree from 12 o'clock clockwise, bottom color, top color*/ 
+.color-bg-gradient-blue {background: linear-gradient(50deg, #6BB9D1, #7CDBF3);}
+.color-bg-gradient-orange {background: linear-gradient(50deg, #DC6200, #FE8402);}
+
+.color-ct-3-1 {	/*GREEN:light-green*/	color: #AFEAAA;}
+.color-ct-3-2 {	/*GREEN:medium-green*/	color: #87E293;}
+.color-ct-3-3 {	/*GREEN:deep-green*/	color: #41924B;}
+.color-ct-2-1 {	/*BLUE:light-blue*/	color: #6BCAE2;}
+.color-ct-2-2 {	/*BLUE:deep-blue*/	color: #51A5BA;}
+.color-ct-1-1 {	/*ORANGE:light-orange*/	color: #FE8402;}
+.color-ct-grey {	color: grey;}
+
+.font-huge{	font-size:10em;}
+.font-grande{	font-size:8em;}
+.font-medium{	font-size:5em;}
+.font-small{	font-size:2em;}
+.font-tiny{	font-size:1em;}
+.font-bold{ font-style: bold;}
+.font-italic{ font-style: italic;}
+.font-lobster{	font-family: 'Lobster', cursive;}
+.font-yahei{ font-family: 'Microsoft JhengHei', 'SimHei', 'MingLiU';}
+.font-kaiti { font-family: 'KaiTi';}
+
+/* Box shadow definition */
+/* The 5 para means: hori-offset, verti-offset, bluring, size, color */
+.shadow-1-blue{    box-shadow: 0.2em 0.2em 0.3em -0.1em lightblue;}
+.shadow-2-blue{    box-shadow: 0.4em 0.4em 0.6em -0.1em lightblue;}
+.shadow-3-blue{    box-shadow: 0.6em 0.6em 0.6em 0em lightblue;}
+.shadow-1-orange{    box-shadow: 0.2em 0.2em 0.3em -0.1em orange;}
+.shadow-2-orange{    box-shadow: 0.4em 0.4em 0.6em -0.1em orange;}
+.shadow-3-orange{    box-shadow: 0.6em 0.6em 0.6em 0em orange;}
+.shadow-1-grey{box-shadow: 0.2em 0.2em 0.3em -0.1em grey;}
+.shadow-2-grey{box-shadow: 0.4em 0.4em 0.6em -0.1em grey;}
+.shadow-3-grey{box-shadow: 0.6em 0.6em 0.6em 0em grey;}
+
+/* Text shadow definition */
+.tshadow-1-grey{text-shadow: 0.1em 0.1em 0.1em grey;}
+.tshadow-2-grey{text-shadow: 0.1em 0.1em 0.2em black;}
+.tshadow-3-grey{text-shadow: 0.1em 0.1em 0.3em grey;}
+
+/* Bottom line of panel or box */
+.bottom-line-orange-1{	border-bottom: 0.3em solid #FE8402; }
+.bottom-line-blue-1{	border-bottom: 0.3em solid #49CAC1; }
+.bottom-line-orange-2{	border-bottom: 0.5em solid #FE8402; }
+.bottom-line-blue-2{	border-bottom: 0.5em solid #49CAC1; }
+.bottom-line-orange-3{	border-bottom: 0.7em solid #FE8402; }
+.bottom-line-blue-3{	border-bottom: 0.7em solid #49CAC1; }
+
+/* Border round radius */
+.border-radius-1 {border-radius:0.1em;}
+.border-radius-2 {border-radius:0.5em;}
+.border-radius-3 {border-radius:1em;}
+.border-radius-4 {border-radius:1.5em;}
+.border-radius-5 {border-radius:2em;}
+.border-top-radius {border-top-left-radius:2em; border-top-right-radius:2em;}
+
+/* Bootstrap source code referece: .nav-pills
+.nav-pills>li{float:left}
+.nav-pills>li>a{border-radius:4px}
+.nav-pills>li+li{margin-left:2px}
+.nav-pills>li.active>a,.nav-pills>li.active>a:focus,.nav-pills>li.active>a:hover{color:#fff;background-color:#337ab7}
+.list-group-item.active>.badge,.nav-pills>.active>a>.badge{color:#337ab7;background-color:#fff}
+.nav-pills>li>a>.badge{margin-left:3px}
+*/
+.nav-pills>li>a{
+	color:#BBBBBB;
+	margin-left: .5em;
+	margin-right: .5em;
+}
+.nav-pills>li>a:hover{
+	color:#fff;
+	background-color:#FE8402;
+	border-radius:5em;
+}
+.nav-pills>.active>a{
+	color:#fff;
+	background-color:#FE8402;
+	border-radius:5em;
+}
+
+/* Override pagination from square to circle */
+.pagination>li>a{
+	border:0;
+	color:#BBBBBB;
+	margin-left: .5em;
+	margin-right: .5em;
+	border-radius:5em;
+}
+.pagination>li>a:hover{
+	border:0;
+	color:#fff;
+	background-color:#FE8402;
+	border-radius:5em;
+}
+.pagination>.active>a{
+	border:0;
+	color:#fff;
+	background-color:#4444FF;
+	border-radius:5em;
+}
+.pagination>.active>a:hover{
+	border:0;
+	color:#fff;
+	background-color:#4444FF;
+	border-radius:5em;
+}
+
+/* Override pager from square to circle */
+.pager>li>a{
+	border:0;
+	color:#BBBBBB;
+	margin-left: .5em;
+	margin-right: .5em;
+	border-radius:5em;
+}
+.pager>li>a:hover{
+	border:0;
+	color:#fff;
+	background-color:#FE8402;
+	border-radius:5em;
+}
+
+/* Override well */
+.well {border-radius:1em; box-shadow: 0.2em 0.2em 0.3em -0.1em grey;}
+
+header {
+	  height: 700px;
+}
+
+#logo>span{
+	display:none;
+}
+
+#header-bg {
+  position: absolute;
+  top: -1px;
+  background: url(../media/kids-banner-blur.jpg) no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 700px;
+}
+
+#menu{
+	display: block;
+}
+
+@media screen and (max-width: 700px) {
+	#header-bg {	width: 100%;	height: 500px;	}
+	header {  height: 500px;}
+	#menu{		display:none;	}
+	#logo>span{		display:inline;	}
+}
+
+/* Phone size */
+@media screen and (max-width: 550px) {
+	#header-bg {		width: 100%;		height: 400px;	}
+	header {	 height: 400px;	}
+	#menu{		display:none;	}
+	#logo>span{		display:inline;	}
+}
+
+/* Section style */
+/* the 3 para of line-gradient means: turn x degree from 12 o'clock clockwise, bottom color, top color*/ 
+.section-blue {
+	background: linear-gradient(50deg, #6BB9D1, #7CDBF3); 
+	margin-top:0; 
+	margin-bottom:0; 
+	padding-top:0;
+	padding-bottom:0;
+	border:0;
+	}
+.section-orange {
+	background: linear-gradient(50deg, #DC6200, #FE8402);
+	margin-top:0; 
+	margin-bottom:0; 
+	padding-top:0;
+	padding-bottom:0;
+	border:0;
+}
+.section-white {
+	background: linear-gradient(50deg, #EFEFEF, #FFFFFF);
+	margin-top:0; 
+	margin-bottom:0; 
+	padding-top:0;
+	padding-bottom:0;
+	border:0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
