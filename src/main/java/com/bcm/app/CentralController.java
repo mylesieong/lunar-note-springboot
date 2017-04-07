@@ -38,49 +38,53 @@ public class CentralController {
     @RequestMapping("/inquiry")
     public InquiryResult inquiry(@RequestParam(value="key", defaultValue="") String key) {
        
-        String sysId = key;
-        String sysName = "";
-        String sysStatus = "";
-        String sysReturnCode = "";
-        
-        try{  
-          String systemName="S657274B"; 
-          String userName="ZCSERVICE";
-          String password="ECIVRESCZ";
-          String programName="/QSYS.LIB/YMYLES1.LIB/DSNTEINQCL.PGM"; 
-          AS400 system = new AS400(systemName, userName , password);
+      String sysId = key;
+      String sysName = "";
+      String sysStatus = "";
+      String sysReturnCode = "";
+      
+      try{  
+        String systemName="S657274B"; 
+        String userName="ZCSERVICE";
+        String password="ECIVRESCZ";
+        String programName="/QSYS.LIB/YMYLES1.LIB/DSNTEINQCL.PGM"; 
+        AS400 system = new AS400(systemName, userName , password);
 
-          /* Prepare parameter list */
-          ProgramParameter[] parmList= new ProgramParameter[4];
-	  AS400Text idText = new AS400Text(8);
-          parmList[0] = new ProgramParameter(idText.toBytes(sysId));
-          parmList[1] = new ProgramParameter(80);
-          parmList[2] = new ProgramParameter(10);
-          parmList[3] = new ProgramParameter(1);
+        /* Prepare parameter list */
+        ProgramParameter[] parmList= new ProgramParameter[4];
+        AS400Text idText = new AS400Text(8);
+        parmList[0] = new ProgramParameter(idText.toBytes(sysId));
+        parmList[1] = new ProgramParameter(80);
+        parmList[2] = new ProgramParameter(10);
+        parmList[3] = new ProgramParameter(1);
 
-          ProgramCall program = new ProgramCall(system);
-          program.setProgram(programName, parmList);
+        ProgramCall program = new ProgramCall(system);
+        program.setProgram(programName, parmList);
 
-          if (program.run()!= true){
-              AS400Message[] messagelist = program.getMessageList();
-              for (int i = 0; i < messagelist.length; ++i){
-                  System.out.println(messagelist[i]);
-              }
-          }else{
-            /* Get the result set */
-	    AS400Text nameText = new AS400Text(80);
-	    AS400Text statusText = new AS400Text(10);
-	    AS400Text returnCodeText = new AS400Text(1);
-	    sysName = (String)nameText.toObject(parmList[1].getOutputData());
-	    sysStatus = (String)statusText.toObject(parmList[2].getOutputData());
-	    sysReturnCode = (String)returnCodeText.toObject(parmList[3].getOutputData());
+        if (program.run()!= true){
+          AS400Message[] messagelist = program.getMessageList();
+          for (int i = 0; i < messagelist.length; ++i){
+              System.out.println(messagelist[i]);
           }
+        }else{
+          // Get the chinese name with cp937 encoding
+          sysName = new String(parmList[1].getOutputData(), "Cp937");
+          // Get the english status with default encoding cp1047
+          AS400Text statusText = new AS400Text(10);
+          sysStatus = (String)statusText.toObject(
+                  parmList[2].getOutputData());
+          // Get the return code with default encoding cp1047
+          AS400Text returnCodeText = new AS400Text(1);
+          sysReturnCode=(String)returnCodeText.toObject(
+                  parmList[3].getOutputData());
 
-        }catch(Exception e){
-          e.printStackTrace();
         }
-        
-        return new InquiryResult(counter.incrementAndGet(), sysId, sysName, sysStatus, sysReturnCode);
+
+      }catch(Exception e){
+        e.printStackTrace();
+      }
+      
+      return new InquiryResult(counter.incrementAndGet(), sysId, sysName, sysStatus, sysReturnCode);
 
     }
     
