@@ -120,6 +120,13 @@ public class CentralController {
         return new DateResult(counter.incrementAndGet(), result);
     }
     
+    @RequestMapping("/date-dummy")
+    public DateResult dateDummy(){
+       
+        int result = 1990;
+        return new DateResult(counter.incrementAndGet(), result);
+
+    }
     public static int toInt(byte[] bytes) {
         int result = 0;
         for (int i=0; i<8; i++) {
