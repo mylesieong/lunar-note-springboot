@@ -24,121 +24,155 @@ import java.lang.Math;
 
 import com.ibm.as400.access.*;
 
+/**
+ * This is the controllor of a springboot project. Two url mapping 
+ * are declared and implemented in this class. 
+ *
+ */
 @RestController
 public class CentralController {
 
+    // Counter to identify API result
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/login")
-    public LoginResult login(@RequestParam(value="netuser", defaultValue="netuser") String name) {
-        int response = 99;
-        return new LoginResult(counter.incrementAndGet(), 99);
-    }
-
+    /**
+     * Method inquiry maps the /inquiry url. When user call this API, it will
+     * read parameter sent from user and invoke AS400 program YMYLES1/DSNTEINQCL 
+     * and return the result to user.
+     *
+     * @return A DateResult object that contains the date
+     */
     @RequestMapping("/inquiry")
     public InquiryResult inquiry(@RequestParam(value="key", defaultValue="") String key) {
        
-      String sysId = key;
-      String sysName = "";
-      String sysStatus = "";
-      String sysReturnCode = "";
+        String sysId = key;
+        String sysName = "";
+        String sysStatus = "";
+        String sysReturnCode = "";
       
-      try{  
-        String systemName="S657274B"; 
-        String userName="ZCSERVICE";
-        String password="ECIVRESCZ";
-        String programName="/QSYS.LIB/YMYLES1.LIB/DSNTEINQCL.PGM"; 
-        AS400 system = new AS400(systemName, userName , password);
+        try{  
+            String systemName="S657274B"; 
+            String userName="ZCSERVICE";
+            String password="ECIVRESCZ";
+            String programName="/QSYS.LIB/YMYLES1.LIB/DSNTEINQCL.PGM"; 
 
-        /* Prepare parameter list */
-        ProgramParameter[] parmList= new ProgramParameter[4];
-        AS400Text idText = new AS400Text(8);
-        parmList[0] = new ProgramParameter(idText.toBytes(sysId));
-        parmList[1] = new ProgramParameter(80);
-        parmList[2] = new ProgramParameter(10);
-        parmList[3] = new ProgramParameter(1);
+            AS400 system = new AS400(systemName, userName , password);
+            ProgramParameter[] parmList= new ProgramParameter[4];
+            AS400Text idText = new AS400Text(8);
+            parmList[0] = new ProgramParameter(idText.toBytes(sysId));
+            parmList[1] = new ProgramParameter(80);
+            parmList[2] = new ProgramParameter(10);
+            parmList[3] = new ProgramParameter(1);
 
-        ProgramCall program = new ProgramCall(system);
-        program.setProgram(programName, parmList);
+            ProgramCall program = new ProgramCall(system);
+            program.setProgram(programName, parmList);
 
-        if (program.run()!= true){
-          AS400Message[] messagelist = program.getMessageList();
-          for (int i = 0; i < messagelist.length; ++i){
-              System.out.println(messagelist[i]);
-          }
-        }else{
-          // Get the chinese name with cp937 encoding
-          sysName = new String(parmList[1].getOutputData(), "Cp937");
-          // Get the english status with default encoding cp1047
-          AS400Text statusText = new AS400Text(10);
-          sysStatus = (String)statusText.toObject(
-                  parmList[2].getOutputData());
-          // Get the return code with default encoding cp1047
-          AS400Text returnCodeText = new AS400Text(1);
-          sysReturnCode=(String)returnCodeText.toObject(
-                  parmList[3].getOutputData());
+            // Run and get the result
+            if (program.run()!= true){
+
+                // Program run fail
+                AS400Message[] messagelist = program.getMessageList();
+                for (int i = 0; i < messagelist.length; ++i){
+                    System.out.println(messagelist[i]);
+                }
+
+            }else{
+
+                // Program run success 
+                sysName = new String(parmList[1].getOutputData(), "Cp937");//Get chinese name with cp937 encoding
+                AS400Text statusText = new AS400Text(10);//Get english status with default encoding cp1047
+                sysStatus = (String)statusText.toObject(parmList[2].getOutputData());
+                AS400Text returnCodeText = new AS400Text(1);//Get return code with default encoding cp1047
+                sysReturnCode=(String)returnCodeText.toObject(parmList[3].getOutputData());
+    
+            }
+
+        }catch(Exception e){
+
+            e.printStackTrace();
 
         }
-
-      }catch(Exception e){
-        e.printStackTrace();
-      }
       
-      return new InquiryResult(counter.incrementAndGet(), sysId, sysName, sysStatus, sysReturnCode);
+        return new InquiryResult(counter.incrementAndGet(),
+                sysId, sysName, sysStatus, sysReturnCode);
 
     }
     
+    /**
+     * Method date maps the /date url. When user call this API, it will
+     * invoke AS400 program IMODULE/DICBSYMD and return the result to
+     * user.
+     *
+     * @return A DateResult object that contains the date
+     */
     @RequestMapping("/date")
     public DateResult date(){
        
         int result = 0;
         
         try{  
-          String systemName="S657274B"; 
-          String userName="ZCSERVICE";
-          String password="ECIVRESCZ";
-          String programName="/QSYS.LIB/IMODULE.LIB/DICBSYMD.PGM";
-          AS400 system = new AS400(systemName, userName , password);
-          ProgramParameter[] parmList= new ProgramParameter[1];
-          parmList[0] = new ProgramParameter(8);
-          ProgramCall program = new ProgramCall(system);
-          program.setProgram(programName, parmList);
-          if (program.run()!= true){
-            AS400Message[] messagelist = program.getMessageList();
-              for (int i = 0; i < messagelist.length; ++i){
-                System.out.println(messagelist[i]);
-              }
-          }else{
-            /* Get the result set */
-            result = toInt(parmList[0].getOutputData());
-          }
+
+            String systemName="S657274B"; 
+            String userName="ZCSERVICE";
+            String password="ECIVRESCZ";
+            String programName="/QSYS.LIB/IMODULE.LIB/DICBSYMD.PGM";
+
+            AS400 system = new AS400(systemName, userName , password);
+            ProgramParameter[] parmList= new ProgramParameter[1];
+            parmList[0] = new ProgramParameter(8);
+
+            ProgramCall program = new ProgramCall(system);
+            program.setProgram(programName, parmList);
+
+            // Run and get the result
+            if (program.run()!= true){
+
+                // Program run fail
+                AS400Message[] messagelist = program.getMessageList();
+                for (int i = 0; i < messagelist.length; ++i){
+                    System.out.println(messagelist[i]);
+                }
+
+            }else{
+
+                // Program run success
+                result = toInt(parmList[0].getOutputData());
+
+            }
+
         }catch(Exception e){
-          e.printStackTrace();
-          result = -1;
+
+            e.printStackTrace();
+            result = -1;
+
         }
         
         return new DateResult(counter.incrementAndGet(), result);
-    }
-    
-    @RequestMapping("/date-dummy")
-    public DateResult dateDummy(){
-       
-        int result = 1990;
-        return new DateResult(counter.incrementAndGet(), result);
 
     }
-    public static int toInt(byte[] bytes) {
+    
+    /**
+     * Method toInt translates AS400 program return value to a java int
+     * variable. 
+     *
+     * @param bytes a list of byte 
+     * @return int 
+     */
+    private static int toInt(byte[] bytes) {
+
         int result = 0;
+
         for (int i=0; i<8; i++) {
             //Packed decimal consum ceiling((x+2)/2) bytes for a x digit number 
             //and it start with 4 bit 0 and end with 4 bit 1
             int index = (i+1)/2;
             int isHigh = i%2;
-            System.out.println("index" + index + ", isHigh"+ isHigh);
             int value = isHigh==1?((int)bytes[index]>>4 & 0x0F):((int)bytes[index]& 0x0F);
             result = result * 10 + value;
         }
+
         return result;
+
     }
     
 }

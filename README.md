@@ -8,7 +8,7 @@ The source includes a static html page(`${project-root}/src/main/resources`) and
 
 In the html part, it simply uses JQuery to launch a restful webservice consumption. 
 
-In the java package, spring-boot is used and the configuration is defined in class `com.bcm.app.App`. The request url mapping and AS400 API resource requesting logic are defined in class `com.bcm.app.CentralController`. 3 kinds of restful api result are defined as `com.bcm.app.DateResult`, `com.bcm.app.LoginResult` and `com.bcm.app.InquiryResult`.  
+In the java package, spring-boot is used and the configuration is defined in class `com.bcm.app.App`. The request url mapping and AS400 API resource requesting logic are defined in class `com.bcm.app.CentralController`. 2 kinds of restful api result are defined as `com.bcm.app.DateResult` and `com.bcm.app.InquiryResult`.  
 
 ## How to build 
 

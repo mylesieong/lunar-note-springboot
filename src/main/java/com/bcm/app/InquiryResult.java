@@ -1,5 +1,10 @@
 package com.bcm.app;
 
+/**
+ * A simple POJO (plain old java object) that represent the result
+ * of inquiry() method defined in class CentralController
+ *
+ */
 public class InquiryResult {
     
     private final long mId;

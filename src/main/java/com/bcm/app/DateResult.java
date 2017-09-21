@@ -1,5 +1,10 @@
 package com.bcm.app;
 
+/**
+ * A simple POJO (plain old java object) that represent the result
+ * of date() method defined in class CentralController
+ *
+ */
 public class DateResult {
     
     private final long mId;
